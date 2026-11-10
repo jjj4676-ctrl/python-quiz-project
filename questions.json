@@ -1,0 +1,18 @@
+[
+    {
+        "prompt": "파이썬에서 리스트의 길이를 구하는 함수는?",
+        "options": ["1. count()", "2. size()", "3. len()", "4. length()"],
+        "answer": 3
+    },
+    {
+        "prompt": "파이썬의 파일 확장자는 무엇인가요?",
+        "options": ["1. .py", "2. .python", "3. .pt", "4. .exe"],
+        "answer": 1
+    },
+    {
+        "prompt": "다음 중 파이썬의 예약어가 아닌 것은?",
+        "options": ["1. if", "2. while", "3. for", "4. define"],
+        "answer": 4
+    }
+]
+
