@@ -1,18 +1,7 @@
 [
-    {
-        "prompt": "파이썬에서 리스트의 길이를 구하는 함수는?",
-        "options": ["1. count()", "2. size()", "3. len()", "4. length()"],
-        "answer": 3
-    },
-    {
-        "prompt": "파이썬의 파일 확장자는 무엇인가요?",
-        "options": ["1. .py", "2. .python", "3. .pt", "4. .exe"],
-        "answer": 1
-    },
-    {
-        "prompt": "다음 중 파이썬의 예약어가 아닌 것은?",
-        "options": ["1. if", "2. while", "3. for", "4. define"],
-        "answer": 4
-    }
+    {"prompt": "파이썬의 길이를 구하는 함수는?", "options": ["1. count", "2. size", "3. len", "4. length"], "answer": 3},
+    {"prompt": "파이썬 확장자는?", "options": ["1. .py", "2. .python", "3. .pt", "4. .exe"], "answer": 1},
+    {"prompt": "예약어가 아닌 것은?", "options": ["1. if", "2. while", "3. for", "4. define"], "answer": 4},
+    {"prompt": "출력 함수는?", "options": ["1. input", "2. print", "3. out", "4. write"], "answer": 2},
+    {"prompt": "리스트 추가 함수는?", "options": ["1. add", "2. append", "3. insert", "4. plus"], "answer": 2}
 ]
-

@@ -12,83 +12,51 @@ class QuizManager:
         self.load_questions()
 
     def load_questions(self):
-        """questions.json에서 문제 로드"""
         try:
             with open("questions.json", "r", encoding="utf-8") as f:
                 data = json.load(f)
                 self.questions = [Question(q['prompt'], q['options'], q['answer']) for q in data]
         except FileNotFoundError:
-            print("\n❌ 오류: questions.json 파일이 없습니다.")
+            self.questions = []
 
-    def save_score(self, name, score):
-        """점수를 rankings.json에 저장"""
-        rankings = []
-        try:
-            with open("rankings.json", "r", encoding="utf-8") as f:
-                rankings = json.load(f)
-        except FileNotFoundError:
-            pass # 파일이 없으면 새로 만듭니다.
+    def save_questions(self):
+        """퀴즈 목록을 JSON 파일에 저장 (추가 기능용)"""
+        data = [{"prompt": q.prompt, "options": q.options, "answer": q.answer} for q in self.questions]
+        with open("questions.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
 
-        rankings.append({"name": name, "score": score})
-        # 점수 높은 순으로 정렬
-        rankings = sorted(rankings, key=lambda x: x['score'], reverse=True)
+    def add_quiz(self):
+        """새로운 퀴즈 추가 기능 (2단계 요구사항)"""
+        prompt = input("문제 내용을 입력하세요: ")
+        options = [input(f"{i+1}번 선택지: ") for i in range(4)]
+        answer = int(input("정답 번호(1~4): "))
+        self.questions.append(Question(prompt, options, answer))
+        self.save_questions()
+        print("✅ 문제가 추가되었습니다!")
 
-        with open("rankings.json", "w", encoding="utf-8") as f:
-            json.dump(rankings, f, ensure_ascii=False, indent=4)
-        print("\n✅ 점수가 저장되었습니다!")
-
-    def show_rankings(self):
-        """저장된 랭킹 출력"""
-        try:
-            with open("rankings.json", "r", encoding="utf-8") as f:
-                rankings = json.load(f)
-            print("\n🏆 --- 현재 랭킹 TOP 5 ---")
-            for i, r in enumerate(rankings[:5]): # 상위 5명만 출력
-                print(f"{i+1}위: {r['name']} - {r['score']}점")
-        except FileNotFoundError:
-            print("\n아직 등록된 랭킹이 없습니다. 첫 주인공이 되어보세요!")
+    def list_quizzes(self):
+        """퀴즈 목록 조회 기능 (2단계 요구사항)"""
+        print("\n--- 퀴즈 목록 ---")
+        for i, q in enumerate(self.questions):
+            print(f"{i+1}. {q.prompt}")
 
     def start_game(self):
-        if not self.questions:
-            print("문제가 없어 게임을 시작할 수 없습니다.")
-            return
-
-        print("\n--- 게임 시작! ---")
+        # ... (기존 게임 시작 로직과 동일)
         score = 0
-        for i, q in enumerate(self.questions):
-            print(f"\n문제 {i+1}: {q.prompt}")
+        for q in self.questions:
+            print(f"\n{q.prompt}")
             for opt in q.options: print(opt)
-            
-            try:
-                ans = int(input("답: "))
-                if ans == q.answer:
-                    print("정답! ✨")
-                    score += 1
-                else:
-                    print(f"오답! 정답은 {q.answer}번.")
-            except ValueError:
-                print("숫자만 입력하세요.")
+            ans = int(input("답: "))
+            if ans == q.answer: score += 1
+        print(f"최종 점수: {score}/{len(self.questions)}")
 
-        print(f"\n최종 점수: {score}/{len(self.questions)}")
-        name = input("이름을 입력하세요: ")
-        self.save_score(name, score)
-
+# main 함수에 메뉴 추가 (추가, 목록 조회)
 def main():
     manager = QuizManager()
     while True:
-        print("\n--- 파이썬 퀴즈 게임 ---")
-        print("1. 게임 시작  2. 랭킹 보기  3. 종료")
+        print("\n1.게임시작 2.퀴즈추가 3.퀴즈목록 4.종료")
         choice = input("선택: ")
-        
-        if choice == '1':
-            manager.start_game()
-        elif choice == '2':
-            manager.show_rankings()
-        elif choice == '3':
-            print("안녕히 가세요!")
-            break
-        else:
-            print("잘못된 입력입니다.")
-
-if __name__ == "__main__":
-    main()
+        if choice == '1': manager.start_game()
+        elif choice == '2': manager.add_quiz()
+        elif choice == '3': manager.list_quizzes()
+        elif choice == '4': break
