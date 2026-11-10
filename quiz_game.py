@@ -37,3 +37,28 @@ for q in questions:
         print(f"아쉽네요. 정답은 '{q['정답']}'입니다. 😅")
 
 print("\n--- 모든 문제를 풀었습니다! 고생하셨습니다. ---")
+
+def main():
+    while True:
+        print("\n--- 파이썬 퀴즈 게임 ---")
+        print("1. 게임 시작")
+        print("2. 랭킹 보기")
+        print("3. 종료")
+        
+        choice = input("메뉴를 선택하세요: ")
+        
+        # [예외 처리] 숫자가 아닌 값을 입력했을 때를 대비합니다.
+        if choice == '1':
+            print("게임을 시작합니다!")
+            # 여기에 나중에 퀴즈 로직이 들어갈 거예요.
+        elif choice == '2':
+            print("현재 랭킹을 표시합니다.")
+        elif choice == '3':
+            print("게임을 종료합니다. 안녕!")
+            break
+        else:
+            print("잘못된 선택입니다. 1, 2, 3 중에서 골라주세요.")
+
+if __name__ == "__main__":
+    main()
+    
