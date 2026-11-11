@@ -1,0 +1,105 @@
+{
+    "quizzes": [
+        {
+            "question": "파이썬에서 '키(Key)'와 '값(Value)'으로 데이터를 저장하는 자료형은?",
+            "choices": [
+                "1) list",
+                "2) tuple",
+                "3) dict",
+                "4) set"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "반복 횟수가 명확할 때 주로 사용하며, 순회 가능한 객체를 다루는 반복문은?",
+            "choices": [
+                "1) while",
+                "2) for",
+                "3) if",
+                "4) repeat"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "함수 내부에서 계산된 결과를 호출한 곳으로 전달하기 위해 사용하는 키워드는?",
+            "choices": [
+                "1) send",
+                "2) give",
+                "3) result",
+                "4) return"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "클래스 내에서 인스턴스 자신을 가리키며, 메서드의 첫 번째 매개변수로 사용되는 것은?",
+            "choices": [
+                "1) this",
+                "2) self",
+                "3) super",
+                "4) me"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "객체가 생성될 때 자동으로 호출되는 초기화 메서드의 이름은?",
+            "choices": [
+                "1) __start__",
+                "2) __init__",
+                "3) __new__",
+                "4) __main__"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "데이터를 구조화하여 저장하거나 네트워크로 전송할 때 주로 사용하는 텍스트 형식은?",
+            "choices": [
+                "1) JSON",
+                "2) TXT",
+                "3) EXE",
+                "4) PNG"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "프로그램 실행 중 발생할 수 있는 예외(에러)를 처리하기 위해 사용하는 구문은?",
+            "choices": [
+                "1) try-except",
+                "2) if-else",
+                "3) for-in",
+                "4) def-return"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "Git에서 변경된 사항을 로컬 저장소에 기록(저장)하는 명령어는?",
+            "choices": [
+                "1) git push",
+                "2) git add",
+                "3) git commit",
+                "4) git pull"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "Git에서 새로운 기능을 독립적으로 개발하기 위해 줄기를 나누는 것을 무엇이라 하는가?",
+            "choices": [
+                "1) Merge",
+                "2) Branch",
+                "3) Clone",
+                "4) Checkout"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "원격 저장소(GitHub 등)의 내용을 내 컴퓨터로 처음 복사해오는 명령어는?",
+            "choices": [
+                "1) git init",
+                "2) git push",
+                "3) git clone",
+                "4) git fork"
+            ],
+            "answer": 3
+        }
+    ],
+    "high_score": 140
+}

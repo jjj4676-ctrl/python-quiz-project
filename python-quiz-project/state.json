@@ -1,0 +1,56 @@
+{
+    "quizzes": [
+        {
+            "question": "파이썬에서 리스트에 요소를 추가하는 함수는?",
+            "choices": [
+                "1) add()",
+                "2) append()",
+                "3) insert()",
+                "4) push()"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "파이썬의 주석 기호는?",
+            "choices": [
+                "1) //",
+                "2) #",
+                "3) /*",
+                "4) --"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "출력할 때 사용하는 함수는?",
+            "choices": [
+                "1) input()",
+                "2) out()",
+                "3) print()",
+                "4) write()"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "정수형 자료형은?",
+            "choices": [
+                "1) int",
+                "2) str",
+                "3) float",
+                "4) bool"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "나머지를 구하는 연산자는?",
+            "choices": [
+                "1) /",
+                "2) //",
+                "3) %",
+                "4) **"
+            ],
+            "answer": 3
+        },
+        
+    ],
+    "high_score": 80
+}
