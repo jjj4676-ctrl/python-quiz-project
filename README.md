@@ -145,6 +145,41 @@ Ctrl+C 등 비정상 종료 시 안전한 종료 및 저장
 - **에러 트래킹**: 저장 실패 시 구체적인 에러 메시지(`Exception`)를 출력하여 문제 원인 파악 및 복구를 용이하게 합니다.
 - **데이터 로드 알림**: 프로그램 시작 시 저장된 데이터를 몇 개 불러왔는지 사용자에게 알려줍니다.
 
+### Git 브랜치 전략
+```PS C:\Users\user\codyssey\python-quiz-project> git checkout -b feature/readme-update
+Switched to a new branch 'feature/readme-update'
+PS C:\Users\user\codyssey\python-quiz-project> git add .
+PS C:\Users\user\codyssey\python-quiz-project> git commit -m "docs: 브랜치 전략 테스트를 위한 수정"
+[feature/readme-update 42ce07e] docs: 브랜치 전략 테스트를 위한 수정
+ 1 file changed, 3 insertions(+)
+PS C:\Users\user\codyssey\python-quiz-project> git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+PS C:\Users\user\codyssey\python-quiz-project> git merge feature/readme-update
+Updating 75e4b6d..42ce07e
+Fast-forward
+ README.md | 3 +++
+ 1 file changed, 3 insertions(+)
+PS C:\Users\user\codyssey\python-quiz-project> git log --graph --oneline --all
+* 42ce07e (HEAD -> main, feature/readme-update) docs: 브랜치 전략 테스트를 위한 수정
+* 75e4b6d docs: 기본 퀴즈 목록 주제별 분류 추가
+* f87b78a (origin/main) feat: 데이터 저장/로드 로그 시스템 구현 및 문서화
+* 5d8b738 Docs: README.md 입력 검증 및 예외 처리 내용 추가
+* 2d9719a Docs: README.md 실행 예시 및 비정상 종료 처리 내용 추가
+* f66b27c Docs: 하위폴더 정리
+* a553617 Final: 중첩 저장소 문제 해결 및 프로젝트 완성
+```
+
+### 📥 Git Clone & Pull 실습 증빙
+본 프로젝트의 원격 저장소를 복제(Clone)하고 최신 상태를 유지(Pull)하는 과정을 실습하였습니다.
+
+#### 1. Git Clone 결과
+![Clone 결과](./images/clone_result.png)
+
+#### 2. Git Pull 결과
+![Pull 결과](./images/pull_result.png)
+
 5. 파일 구조
 main.py: 프로그램의 진입점이며 QuizGame 클래스를 실행합니다.
 models.py (또는 main.py 내): Quiz, QuizGame 클래스가 정의되어 있습니다.
