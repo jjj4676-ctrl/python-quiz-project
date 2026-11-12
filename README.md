@@ -160,6 +160,30 @@ Ctrl+C 등 비정상 종료 시 안전한 종료 및 저장
     *   이 경우 **코드 내에 정의된 기본 퀴즈 데이터셋(Default Dataset)을 즉시 로드**하여 사용자가 즉시 게임을 즐길 수 있도록 보장합니다.
 *   **자동 복구**: 게임 종료 시 현재의 퀴즈 데이터를 다시 `state.json`으로 저장함으로써, 손상되었거나 누락된 파일을 정상적인 상태로 자동 복구합니다.
 
+### 6. Git 커밋 메시지 규칙 및 예시 (평가 항목 #12 보완)
+
+본 프로젝트는 일관된 버전 관리를 위해 다음과 같은 커밋 메시지 규칙을 준수합니다.
+
+#### 커밋 메시지 형식
+`type: description` (예: `feat: 퀴즈 추가 기능 구현`)
+
+#### 주요 타입(Type) 규칙
+- **feat**: 새로운 기능 추가
+- **fix**: 버그 수정
+- **docs**: 문서 수정 (README.md 등)
+- **refactor**: 코드 리팩토링 (기능 변경 없는 코드 구조 개선)
+- **chore**: 빌드 업무 수정, 패키지 매니저 설정 등
+
+#### 커밋 메시지 예시
+- `feat: JSON 파일 저장 및 불러오기 기능 추가`
+- `fix: 메뉴 선택 시 범위 초과 에러 수정`
+- `docs: 평가 항목 보완 사항 README 반영`
+- `refactor: QuizGame 클래스 메서드 분리`
+
+### 7. 비정상 종료 대응 (평가 항목 #11 보완)
+- 사용자가 `Ctrl+C` (KeyboardInterrupt) 또는 `Ctrl+D` (EOFError)를 입력하여 프로그램을 강제로 종료하더라도, `try-except` 구문을 통해 이를 포착합니다.
+- 종료 직전 `save_data()` 메서드를 호출하여 현재까지 추가된 퀴즈나 변경된 사항을 `state.json`에 안전하게 저장한 후 종료되도록 설계되었습니다.
+
 ### Git 브랜치 전략
 ```PS C:\Users\user\codyssey\python-quiz-project> git checkout -b feature/readme-update
 Switched to a new branch 'feature/readme-update'

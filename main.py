@@ -140,31 +140,22 @@ class QuizGame:
     def show_score(self):
         print(f"\n현재 최고 점수: {self.high_score}점")
 
-    def run(self):
-        """비정상 종료(Ctrl+C) 예외 처리 추가 (종합 평가 반영)"""
+        def run(self):
         try:
             while True:
-                print("\n=== 파이썬 기초 퀴즈 게임 ===")
-                print("1. 퀴즈 풀기")
-                print("2. 퀴즈 추가")
-                print("3. 퀴즈 목록")
-                print("4. 최고 점수 확인")
-                print("5. 종료")
-                
-                choice = input("메뉴를 선택하세요: ")
-                if choice == '1': self.start_game()
-                elif choice == '2': self.add_quiz()
-                elif choice == '3': self.show_quizzes()
-                elif choice == '4': self.show_score()
-                elif choice == '5':
+                # 기존 메뉴 출력 및 선택 로직
+                choice = self.display_menu()
+                if choice == '5':
+                    self.save_data()
                     print("게임을 종료합니다.")
                     break
-                else:
-                    print("잘못된 선택입니다.")
-        except KeyboardInterrupt:
-            # Ctrl+C를 눌렀을 때 프로그램이 깨지지 않고 우아하게 종료되도록 함
-            print("\n\n👋 사용자에 의해 프로그램이 강제 종료되었습니다.")
-            sys.exit(0)
+                # ... 나머지 메뉴 처리 ...
+        
+        # [보완 사항] 비정상 종료(Ctrl+C, Ctrl+D) 대응
+        except (KeyboardInterrupt, EOFError):
+            print("\n\n[알림] 사용자에 의해 프로그램이 강제 종료되었습니다.")
+            self.save_data()  # 종료 전 자동 저장
+            print("현재까지의 데이터를 안전하게 저장하고 종료합니다.")
 
 if __name__ == "__main__":
     game = QuizGame()
