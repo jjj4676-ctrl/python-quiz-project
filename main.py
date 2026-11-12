@@ -25,19 +25,28 @@ class QuizGame:
         self.load_data()
 
     def load_data(self):
-        """파일 읽기 예외 처리 강화 (종합 평가 반영)"""
+        """state.json에서 데이터를 불러오고 성공/실패 로그를 남깁니다."""
         if os.path.exists(self.file_path):
             try:
                 with open(self.file_path, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     self.high_score = data.get("high_score", 0)
                     self.quizzes = [Quiz(**q) for q in data.get("quizzes", [])]
-            except (json.JSONDecodeError, KeyError):
-                # 파일이 깨져있거나 형식이 잘못된 경우 처리
-                print("⚠️ 데이터 파일이 손상되어 초기화합니다.")
+                
+                # ✅ 성공 로그: 몇 개의 데이터를 가져왔는지 명시
+                print(f"[시스템] 데이터 로드 성공: {len(self.quizzes)}개의 퀴즈를 불러왔습니다.")
+                
+            except (json.JSONDecodeError, KeyError) as e:
+                # ❌ 실패 로그: 파일이 깨졌을 때 원인 출력
+                print(f"[시스템/에러] 데이터 로드 실패: 파일 형식이 잘못되었습니다. ({e})")
                 self.quizzes = []
-                self.high_score = 0
-        
+            except Exception as e:
+                # ❌ 기타 예외 발생 시 로그
+                print(f"[시스템/에러] 알 수 없는 로드 오류: {e}")
+        else:
+            print("[시스템] 저장된 데이터 파일이 없어 기본 퀴즈를 생성합니다.")
+
+        # 기본 퀴즈 생성 로직 (기존과 동일)
         if not self.quizzes:
             self.quizzes = [
                 Quiz("파이썬에서 리스트에 요소를 추가하는 함수는?", ["1) add()", "2) append()", "3) insert()", "4) push()"], 2),
@@ -49,12 +58,24 @@ class QuizGame:
             self.save_data()
 
     def save_data(self):
-        data = {
-            "quizzes": [q.to_dict() for q in self.quizzes],
-            "high_score": self.high_score
-        }
-        with open(self.file_path, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
+        """현재 상태를 state.json에 저장하고 성공/실패 로그를 남깁니다."""
+        try:
+            data = {
+                "quizzes": [q.to_dict() for q in self.quizzes],
+                "high_score": self.high_score
+            }
+            with open(self.file_path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
+            
+            # ✅ 성공 로그: 저장이 완료되었음을 알림
+            print(f"[시스템] 데이터 저장 완료: '{self.file_path}'에 안전하게 기록되었습니다.")
+            
+        except PermissionError:
+            # ❌ 실패 로그: 권한 문제 등 특정 상황 명시
+            print("[시스템/에러] 데이터 저장 실패: 파일 쓰기 권한이 없습니다.")
+        except Exception as e:
+            # ❌ 실패 로그: 기타 에러 발생 시 복구를 위해 에러 내용 출력
+            print(f"[시스템/에러] 데이터 저장 중 오류 발생: {e}")
 
     def start_game(self):
         """정답 입력 범위 검증 로직 추가 (평가 항목 #2 반영)"""
