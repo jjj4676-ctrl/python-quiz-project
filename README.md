@@ -89,6 +89,9 @@ class QuizGame:
 | 4 | 자료형 (Type) | 정수형 자료형은 무엇인가? |
 | 5 | 연산자 (Operator) | 나머지를 구하는 연산자는? |
 
+- 시험입력
+
+
 ## 🏗 시스템 구조 (Class Diagram)
 ### 1. `Quiz` 클래스
 - `question`: 질문 내용
