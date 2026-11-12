@@ -28,23 +28,19 @@ class QuizGame:
         """state.json에서 데이터를 불러오고 성공/실패 로그를 남깁니다."""
         if os.path.exists(self.file_path):
             try:
-                with open(self.file_path, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                    self.high_score = data.get("high_score", 0)
-                    self.quizzes = [Quiz(**q) for q in data.get("quizzes", [])]
-                
-                # ✅ 성공 로그: 몇 개의 데이터를 가져왔는지 명시
-                print(f"[시스템] 데이터 로드 성공: {len(self.quizzes)}개의 퀴즈를 불러왔습니다.")
-                
-            except (json.JSONDecodeError, KeyError) as e:
-                # ❌ 실패 로그: 파일이 깨졌을 때 원인 출력
-                print(f"[시스템/에러] 데이터 로드 실패: 파일 형식이 잘못되었습니다. ({e})")
-                self.quizzes = []
-            except Exception as e:
-                # ❌ 기타 예외 발생 시 로그
-                print(f"[시스템/에러] 알 수 없는 로드 오류: {e}")
-        else:
-            print("[시스템] 저장된 데이터 파일이 없어 기본 퀴즈를 생성합니다.")
+            if not os.path.exists('state.json'):
+                raise FileNotFoundError # 파일이 없으면 예외 발생시켜 except문으로 유도
+            
+            with open('state.json', 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                # 데이터 변환 로직...
+                print("[시스템] 데이터를 성공적으로 불러왔습니다.")
+
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            # 파일이 없거나 내용이 깨진 경우(JSONDecodeError) 실행
+            print(f"[경고] 데이터 파일 로드 실패({type(e).__name__}). 기본 데이터로 복구합니다.")
+            self.quizzes = self.get_default_quizzes() # 기본 데이터셋 로드
+            self.save_data() # 복구된 상태를 파일로 다시 저장
 
         # 기본 퀴즈 생성 로직 (기존과 동일)
         if not self.quizzes:
