@@ -24,6 +24,61 @@
    - **5. 데이터 초기화**: 랭킹 기록 삭제 기능
    - **6. 종료**: 안전하게 데이터를 저장하고 프로그램 종료
 
+## 📸 실행 예시 (Execution Example)
+
+### 1. 메인 메뉴 및 퀴즈 풀기
+```text
+==== 파이썬 기초 퀴즈 게임 ====
+1. 게임 시작
+2. 퀴즈 추가
+3. 퀴즈 목록 보기
+4. 랭킹 확인
+5. 데이터 초기화
+6. 종료
+선택: 1
+
+[문제 1] 파이썬에서 리스트에 요소를 추가하는 함수는?
+1) push()  2) append()  3) add()  4) insert()
+정답 입력: 2
+✅ 정답입니다!
+
+
+---
+
+### 2단계: 비정상 종료 및 파일 I/O 예외 처리 (종합 평가 보완)
+
+종합 평가에서 지적된 **"비정상 종료 처리"**와 **"파일 IO 예외 처리"**를 코드에 반영해야 합니다. 사용자가 `Ctrl+C`를 누르거나, `state.json` 파일이 깨져있을 때 프로그램이 튕기지 않게 만드는 것이 핵심입니다.
+
+**[main.py 보완 가이드]**
+
+```python
+import json
+import sys
+
+class QuizGame:
+    def load_data(self):
+        try:
+            with open("state.json", "r", encoding="utf-8") as f:
+                return json.load(f)
+        except FileNotFoundError:
+            # 파일이 없을 때 기본 데이터 생성 (예외 처리)
+            return {"quizzes": [], "ranks": []}
+        except json.JSONDecodeError:
+            # 파일이 손상되었을 때 처리
+            print("⚠️ 데이터 파일이 손상되었습니다. 초기 상태로 시작합니다.")
+            return {"quizzes": [], "ranks": []}
+
+    def run(self):
+        try:
+            while True:
+                # 메뉴 출력 및 로직
+                pass 
+        except KeyboardInterrupt:
+            # Ctrl+C 비정상 종료 처리
+            print("\n\n👋 프로그램을 강제 종료합니다. 데이터는 안전하게 보관됩니다.")
+            self.save_data() # 종료 전 자동 저장
+            sys.exit(0)
+
 ## 🏗 시스템 구조 (Class Diagram)
 ### 1. `Quiz` 클래스
 - `question`: 질문 내용
