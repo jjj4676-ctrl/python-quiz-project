@@ -153,6 +153,24 @@ class QuizGame:
             self.save_data()  # 종료 전 자동 저장
             print("현재까지의 데이터를 안전하게 저장하고 종료합니다.")
 
+def backup_data(self):
+        """데이터 저장 전 백업 파일 생성 (평가 항목 #19 반영)"""
+        try:
+            if os.path.exists('state.json'):
+                shutil.copy('state.json', 'state.json.bak')
+                # print("[시스템] 백업 파일(state.json.bak)이 생성되었습니다.")
+        except Exception as e:
+            print(f"[경고] 백업 생성 실패: {e}")
+
+    def reset_data(self):
+        """데이터 초기화 및 기존 데이터 백업 (평가 항목 #19 반영)"""
+        confirm = input("정말로 모든 데이터를 초기화하시겠습니까? (y/n): ")
+        if confirm.lower() == 'y':
+            self.backup_data() # 초기화 전 현재 상태 백업
+            self.quizzes = self.get_default_quizzes() # 기본값으로 교체
+            self.save_data()
+            print("[알림] 데이터가 초기화되었습니다. (이전 데이터는 .bak 파일에 보관됨)")
+
 if __name__ == "__main__":
     game = QuizGame()
     game.run()
